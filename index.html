@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Versari</title>
 
   <style>
@@ -10,95 +10,242 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      scroll-behavior: smooth; /* 🔥 Rolagem suave */
     }
 
     body {
-      background: #f1f1f1;
+      background: #f2f1e9;
       color: #333;
     }
 
-    header {
-      background: #1a1a1a;
-      color: #fff;
-      padding: 30px 20px;
-      text-align: center;
+    /* -------------------- NAVBAR -------------------- */
+
+    nav {
+      width: 100%;
+      background: #1a2240;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
-    header h1 {
-      font-size: 2.4rem;
-      font-weight: bold;
+    nav .brand {
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 1px;
     }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 25px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #d9d9d9;
+    }
+
+    /* Botão Mobile */
+    .menu-btn {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-btn div {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 5px;
+    }
+
+    /* Menu mobile */
+    @media (max-width: 768px) {
+      nav ul {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #1a2240;
+        width: 200px;
+        flex-direction: column;
+        padding: 20px 0;
+        display: none;
+        border-bottom-left-radius: 15px;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .menu-btn {
+        display: flex;
+      }
+
+      nav ul.show {
+        display: block;
+      }
+    }
+
+    /* -------------------- HEADER -------------------- */
+
+    header {
+      background: #1a2240;
+      padding: 120px 20px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 60px; /* espaço da navbar fixa */
+    }
+
+    .logo-wrapper {
+      display: inline-block;
+      background: #f2f1e9;
+      padding: 25px 35px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    header img {
+      width: 180px;
+      display: block;
+    }
+
+    /* -------------------- SECTION -------------------- */
 
     .section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 40px;
+      max-width: 980px;
+      margin: 60px auto;
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      padding: 60px;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
 
     .section h2 {
-      font-size: 1.8rem;
+      font-size: 2rem;
+      color: #1a2240;
       margin-bottom: 20px;
-      color: #222;
+      font-weight: 600;
     }
 
     .section p {
-      margin-bottom: 16px;
-      line-height: 1.7;
-      font-size: 1rem;
+      line-height: 1.75;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #444;
     }
 
     .contact-box {
-      margin-top: 20px;
-      padding: 20px;
-      border-left: 4px solid #1a1a1a;
-      background: #fafafa;
-      border-radius: 8px;
-    }
-
-    .contact-box p {
-      margin-bottom: 10px;
-      font-size: 1rem;
+      background: #f7f5ef;
+      border-left: 5px solid #b36a4c;
+      padding: 25px;
+      margin-top: 25px;
+      border-radius: 12px;
     }
 
     footer {
+      margin-top: 60px;
+      padding: 40px 20px;
+      background: #1a2240;
       text-align: center;
-      padding: 25px;
-      background: #1a1a1a;
       color: #fff;
-      margin-top: 40px;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      position: relative;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Versari</h1>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="brand">Versari</div>
+
+    <ul id="menu">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+
+    <div class="menu-btn" onclick="toggleMenu()">
+      <div></div><div></div><div></div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header id="inicio">
+    <div class="logo-wrapper">
+      <img src="/public/Imagem1.png" alt="Logo Versari" />
+    </div>
   </header>
 
-  <section class="section">
+  <!-- SOBRE -->
+  <section class="section" id="sobre">
     <h2>Sobre a Versari</h2>
     <p>
-      A Versari é uma empresa especializada em gestão condominial, oferecendo serviços de leitura de gás e água, cotações de manutenção, 
-      atas de assembleias, entre outros. Com uma equipe dedicada e experiente, a Versari busca proporcionar soluções eficientes e personalizadas para
-      atender às necessidades específicas de cada condomínio.
+      Trabalhar com lares exige cuidado, empatia e experiência. A Versari atua com excelência na gestão condominial,
+      oferecendo serviços como leitura de água e gás, organização de assembleias, cotações de manutenção e suporte amplo
+      para demandas administrativas.
     </p>
+    <p>
+      Com uma identidade visual marcada por curvas, acolhimento e proximidade, a Versari se posiciona como uma empresa
+      que entende o valor do lar e da convivência harmoniosa.
+    </p>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="section" id="servicos">
+    <h2>Serviços</h2>
+    <p>• Leitura de água e gás</p>
+    <p>• Organização de assembleias</p>
+    <p>• Cotações e supervisão de manutenção</p>
+    <p>• Suporte administrativo completo</p>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="section" id="contato">
+    <h2>Contato</h2>
 
     <div class="contact-box">
       <h3>Informações de Contato</h3>
       <p><strong>Email:</strong> contato@versari.com.br</p>
-      <p><strong>CNPJ:</strong> 05.141.567/0001-00</p>
       <p><strong>Telefone:</strong> (83) 3035-4399</p>
     </div>
   </section>
 
   <footer>
     © 2025 Versari — Todos os direitos reservados.
+  <br />
+  <span><strong>CNPJ:</strong> 05.141.567/0001-00</span>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("show");
+    }
+  </script>
 
 </body>
 </html>
